@@ -17,11 +17,13 @@ url = ("https://newsapi.org/v2/everything?"
 request = requests.get(url)
 content = request.json()
 
-## Sending email
+## Adding the news to the email
 email_body = ""
 for article in content["articles"][:20]:
     if article["title"] is not None:
-        email_body = (email_body + article['title'] + "\n" + article["description"]
-                      + "\n" + article['url'] + 2*"\n")
+        email_body = (email_body + article['title'] + "\n" +
+                      article["description"] + "\n" + article['url'] +
+                      2 * "\n")
 
-send_mail("Today's Tesla News", message=email_body)
+## Sending the email with "Today's Tesla News" as the subject
+send_mail(subject="Today's Tesla News", message=email_body)
